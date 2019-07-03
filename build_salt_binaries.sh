@@ -26,17 +26,18 @@ else
   curl https://repo.saltstack.com/apt/ubuntu/$(lsb_release -rs)/amd64/2018.3/SALTSTACK-GPG-KEY.pub | apt-key add -
   echo "deb http://repo.saltstack.com/apt/ubuntu/$(lsb_release -rs)/amd64/2018.3 $(lsb_release -cs) main" >> /etc/apt/sources.list.d/saltrepo.list
   apt-get update
-  apt-get install build-essential python-dev salt-minion salt-master salt-ssh salt-api python-pex-cli libmysqlclient-dev python-configparser -y
+  apt-get install build-essential python-dev salt-minion salt-master salt-ssh salt-api python-pex-cli libmysqlclient-dev python-configparser python-pip -y
+  pip install wheel
 fi
 
-pex salt mysql-python python-gnupg -c salt-run -o salt-run
-pex salt mysql-python python-gnupg -c salt-master -o salt-master
-pex salt mysql-python python-gnupg -c salt-minion -o salt-minion
-pex salt mysql-python python-gnupg -c salt-api -o salt-api
-pex salt mysql-python python-gnupg -c salt-call -o salt-call
-pex salt mysql-python python-gnupg -c salt -o salt
-pex salt mysql-python python-gnupg -c salt-key -o salt-key
-pex salt mysql-python python-gnupg -c salt-ssh -o salt-ssh
+pex --python=python2.7 salt mysql-python python-gnupg -c salt-run -o salt-run
+pex --python=python2.7 salt mysql-python python-gnupg -c salt-master -o salt-master
+pex --python=python2.7 salt mysql-python python-gnupg -c salt-minion -o salt-minion
+pex --python=python2.7 salt mysql-python python-gnupg -c salt-api -o salt-api
+pex --python=python2.7 salt mysql-python python-gnupg -c salt-call -o salt-call
+pex --python=python2.7 salt mysql-python python-gnupg -c salt -o salt
+pex --python=python2.7 salt mysql-python python-gnupg -c salt-key -o salt-key
+pex --python=python2.7 salt mysql-python python-gnupg -c salt-ssh -o salt-ssh
 
 mkdir /var/tmp/saltbuild
 cp /salt-* /var/tmp/saltbuild/
