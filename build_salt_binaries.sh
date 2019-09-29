@@ -16,7 +16,7 @@ if [ -e /etc/redhat-release ]; then
     yum install -y libssh2 python-pygit2 mysql-devel gmp-devel python27-devel python27-pip
     pip2.7 install pex
   else
-    yum install -y libssh2 python-pygit2 mysql-devel gmp-devel python-devel python-pip
+    yum install -y libssh2 python-pygit2 mysql-devel gmp-devel python-devel python-pip dbus-python python-inotify python2-pyroute2 dbus-devel glib2-devel
     pip install pex
   fi
 else
@@ -32,7 +32,7 @@ fi
 
 pex --python=python2.7 salt mysql-python python-gnupg -c salt-run -o salt-run
 pex --python=python2.7 salt mysql-python python-gnupg -c salt-master -o salt-master
-pex --python=python2.7 salt mysql-python python-gnupg -c salt-minion -o salt-minion
+pex --python=python2.7 salt mysql-python python-gnupg psutil datetime pyroute2 pyinotify dbus-python ast -c salt-minion -o salt-minion
 pex --python=python2.7 salt mysql-python python-gnupg -c salt-api -o salt-api
 pex --python=python2.7 salt mysql-python python-gnupg -c salt-call -o salt-call
 pex --python=python2.7 salt mysql-python python-gnupg -c salt -o salt
