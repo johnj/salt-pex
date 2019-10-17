@@ -1,3 +1,3 @@
 # salt-pex
 
-Execute all.sh to use pex and docker to generate a single-binary for various salt commands.
+Execute all.sh, pex and docker are used to generate a single-binary for various salt commands.

@@ -30,14 +30,9 @@ else
   pip install wheel
 fi
 
-pex --python=python2.7 salt mysql-python python-gnupg -c salt-run -o salt-run
-pex --python=python2.7 salt mysql-python python-gnupg -c salt-master -o salt-master
-pex --python=python2.7 salt mysql-python python-gnupg psutil datetime pyroute2 pyinotify dbus-python ast -c salt-minion -o salt-minion
-pex --python=python2.7 salt mysql-python python-gnupg -c salt-api -o salt-api
-pex --python=python2.7 salt mysql-python python-gnupg -c salt-call -o salt-call
-pex --python=python2.7 salt mysql-python python-gnupg -c salt -o salt
-pex --python=python2.7 salt mysql-python python-gnupg -c salt-key -o salt-key
-pex --python=python2.7 salt mysql-python python-gnupg -c salt-ssh -o salt-ssh
+for i in `echo salt salt-run salt-master salt-minion salt-api salt-call salt-key salt-ssh`; do
+  pex --python=python2 --python-shebang='/usr/bin/env python2' salt==2018.3.4 msgpack==0.5.6 mysql-python python-gnupg psutil datetime pyroute2 pyinotify dbus-python ast -c $i -o $i
+done
 
 mkdir /var/tmp/saltbuild
 cp /salt-* /var/tmp/saltbuild/
